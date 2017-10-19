@@ -16,13 +16,15 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from app1 import views
-from rest_framework import routers
-
-router = routers.DefaultRouter()
-router.register(r'committe', views.committeViewSet)
-router.register(r'member', views.memberViewSet)
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
-    url(r'^api/', include('rest_framework.urls',namespace='rest_framework')),
+    url(r'^admin/', admin.site.urls),
+    url(r'^committe/$',views.committeList.as_view()),
+    url(r'^committe/(?P<pk>[0-9]+)/$', views.committeDetail.as_view()),
+    url(r'^members/$',views.memberList.as_view()),
+    url(r'^members/(?P<pk>[0-9]+)/$', views.memberDetail.as_view()),
+
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)

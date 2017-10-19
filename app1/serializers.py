@@ -2,15 +2,15 @@ from rest_framework import serializers
 from .models import committe, member
 
 
-class committeSerializer(serializers.HyperlinkedModelSerializer):
+class committeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = committe
-        fields =('__all__')
+        fields =('name', 'members_no','value')
 
 
-class memberSerializer(serializers.HyperlinkedModelSerializer):
+class memberSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = member
-        fields = ('__all__')
+        fields = ('name','committe','tasks')
